@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //Print the following details name, capital, flag using forEach function
+        var request=new XMLHttpRequest();
+        request.open('GET','https://restcountries.com/v3.1/all',true)
+        request.send();
+        request.onload=function(){
+            var data=JSON.parse(request.response)
+            data.forEach(element => {
+                if(element.capital!=undefined)
+                    console.log("Name : "+element.name.official+"\nCapital : "+element.capital[0]+"\nflag : "+element.flags.png);
+                else
+                    console.log("Name : "+element.name.official+"\nflag : "+element.flags.png);
+            });
+        }
+    </script>
+</body>
+</html>

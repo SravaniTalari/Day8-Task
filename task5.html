@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+        // Print the country which uses US Dollars as currency
+        var request=new XMLHttpRequest();
+        request.open('GET','https://restcountries.com/v3.1/all',true)
+        request.send();
+        request.onload=function(){
+            var data=JSON.parse(request.response)
+            var countries=data.filter((element)=> element.currencies!=undefined);
+            var dollarCurrencyCountries=countries.filter((element)=>{
+                for(var key in element.currencies)
+                {
+                    if(key=="USD")
+                        return element
+                }
+            })
+            dollarCurrencyCountries.forEach(element => {
+                console.log(element.name.official );
+            });
+        }
+    </script>
+</body>
+</html>
